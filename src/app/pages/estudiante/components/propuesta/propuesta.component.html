@@ -1,0 +1,69 @@
+<div class="container">
+  <ng-container *ngIf="solicitudesTrabajoGrado.length > 0; else needSolicitud">
+    <ng-container *ngTemplateOutlet="propuestaTemplate"></ng-container>
+  </ng-container>
+
+  <ng-template #needSolicitud>
+    <app-alert
+      [title]="titleNeedSolicitud"
+      [text]="textNeedSolicitud"
+      [type]="'warning'"
+    ></app-alert>
+  </ng-template>
+</div>
+
+<ng-template #propuestaTemplate>
+  <ng-container *ngIf="propuestas.length; else notData">
+    <table class="table table-bordered mt-4">
+      <thead class="bg-danger">
+        <tr>
+          <th *ngFor="let headerTable of headersTable">
+            {{ headerTable }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let propuesta of propuestas">
+          <td>
+            <app-item-email
+              [email]="propuesta.solicitudTrabajoGrado.estudiante.email"
+            ></app-item-email>
+          </td>
+          <td>{{ propuesta.solicitudTrabajoGrado.estudiante.nombre }}</td>
+          <td>
+            <app-badge
+              [title]="propuesta.estado | i18nSelect : estadoMap"
+              [clase]="
+                convertClaseColor(
+                  propuesta.estado | i18nSelect : estadoClassMap
+                )
+              "
+            ></app-badge>
+          </td>
+          <td>{{ propuesta.createdAt | date }}</td>
+          <td>
+            <app-dropdown
+              [dropdown]="dropdown"
+              (clicker)="clickEvents($event, propuesta.id, propuesta.estado)"
+            ></app-dropdown>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+
+  <ng-template #notData>
+    <div class="d-flex justify-content-end my-3">
+      <app-button
+        [text]="'Crear Propuesta'"
+        (clicker)="openModalCreatePropuesta()"
+      ></app-button>
+    </div>
+
+    <app-alert
+      [title]="titleNeedPropuesta"
+      [text]="textNeedPropuesta"
+      [type]="'warning'"
+    ></app-alert>
+  </ng-template>
+</ng-template>

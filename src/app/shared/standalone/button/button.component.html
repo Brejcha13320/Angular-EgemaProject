@@ -1,0 +1,15 @@
+<button
+  type="button"
+  class="btn"
+  [class]="'btn-' + clase"
+  [class]="outline ? 'btn-outline-' + clase : 'btn-' + clase"
+  [ngClass]="{ 'w-100': widthType === 'full' }"
+  [placement]="placement"
+  [ngbTooltip]="tooltip"
+  [disabled]="disabled"
+  (click)="onEmit()"
+>
+  <i *ngIf="icon && iconDir === 'start'" class="bi" [class]="'bi-' + icon"></i>
+  {{ text }}
+  <i *ngIf="icon && iconDir === 'end'" class="bi" [class]="'bi-' + icon"></i>
+</button>

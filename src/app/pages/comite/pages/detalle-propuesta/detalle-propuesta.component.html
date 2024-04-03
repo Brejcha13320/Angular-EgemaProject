@@ -1,0 +1,52 @@
+<ng-container *ngIf="propuesta">
+  <!-- Detalle Propuesta -->
+  <app-detail-propuesta
+    [title]="title"
+    [message]="message"
+    [titleNotPropuesta]="titleNotPropuesta"
+    [textNotPropuesta]="textNotPropuesta"
+    [propuesta]="propuesta"
+    [nameRedirect]="nameRedirect"
+    [shwoCometarios]="false"
+    (redirect)="redirect()"
+  ></app-detail-propuesta>
+
+  <!-- Cambiar Estado -->
+  <div class="border rounded p-3 mt-4">
+    <div>
+      <h5>Cambiar Estado de Propuesta</h5>
+    </div>
+    <div *ngIf="form" class="my-4" [formGroup]="form">
+      <div class="input-group mb-3">
+        <span class="input-group-text">Selecciona una Opción</span>
+        <select class="form-select" formControlName="estado">
+          <option value="" selected disabled>Seleccione una Opción</option>
+          <option value="APROBADO">Aprobado</option>
+          <option value="PENDIENTE">Pendiente</option>
+          <option value="CAMBIOS">Cambios</option>
+          <option value="NO_APROBADO">No Aprobado</option>
+        </select>
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text">Comentarios</span>
+        <textarea
+          class="form-control"
+          rows="3"
+          [maxlength]="limitText"
+          formControlName="comentarios"
+        ></textarea>
+      </div>
+      <small class="text-secondary"
+        >Cantidad de caracteres {{ getFormFieldValue("comentarios").length }} de
+        {{ this.limitText }}
+      </small>
+      <div class="d-flex justify-content-end mt-4">
+        <app-button
+          [clase]="'success'"
+          [text]="'Actualizar'"
+          (clicker)="updatePropuesta()"
+        ></app-button>
+      </div>
+    </div>
+  </div>
+</ng-container>

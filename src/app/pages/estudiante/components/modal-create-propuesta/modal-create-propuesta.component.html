@@ -1,0 +1,153 @@
+<app-modal-header
+  [title]="propuestaId ? 'Actualizar Propuesta' : 'Crear Propuesta'"
+  (clicker)="close()"
+></app-modal-header>
+
+<div class="modal-body">
+  <div *ngIf="form" class="container" [formGroup]="form">
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Titulo</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Escriba el Titulo"
+        formControlName="titulo"
+        [ngClass]="{
+          'is-invalid': isInvalid('titulo'),
+          'is-valid': isValid('titulo')
+        }"
+      />
+      <small class="text-secondary"
+        >Cantidad de caracteres {{ getFormFieldValue("titulo").length }} de
+        {{ this.limitTitle }}
+      </small>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label fw-semibold"
+        >Selecciona una Línea de Investigación</label
+      >
+      <select
+        class="form-select"
+        formControlName="lineaInvestigacion"
+        [ngClass]="{
+          'is-invalid': isInvalid('lineaInvestigacion'),
+          'is-valid': isValid('lineaInvestigacion')
+        }"
+      >
+        <option value="" selected disabled>Seleccione una Opción</option>
+        <option value="TELEMATICA_REDES">Telemática y Redes</option>
+        <option value="INGENIERIA_SOFTWARE">Ingeniería de Software</option>
+        <option value="OTRA">Otra</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Problema</label>
+      <textarea
+        class="form-control"
+        rows="5"
+        formControlName="problema"
+        placeholder="Escriba el Problema"
+        [maxlength]="limitText"
+        [ngClass]="{
+          'is-invalid': isInvalid('problema'),
+          'is-valid': isValid('problema')
+        }"
+      ></textarea>
+      <small class="text-secondary"
+        >Cantidad de caracteres {{ getFormFieldValue("problema").length }} de
+        {{ this.limitText }}
+      </small>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Objetivo</label>
+      <textarea
+        class="form-control"
+        rows="5"
+        formControlName="objetivo"
+        placeholder="Escriba el Objetivo"
+        [maxlength]="limitText"
+        [ngClass]="{
+          'is-invalid': isInvalid('objetivo'),
+          'is-valid': isValid('objetivo')
+        }"
+      ></textarea>
+      <small class="text-secondary"
+        >Cantidad de caracteres {{ getFormFieldValue("objetivo").length }} de
+        {{ this.limitText }}
+      </small>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Alcance</label>
+      <textarea
+        class="form-control"
+        rows="5"
+        formControlName="alcance"
+        placeholder="Escriba el Alcance"
+        [maxlength]="limitText"
+        [ngClass]="{
+          'is-invalid': isInvalid('alcance'),
+          'is-valid': isValid('alcance')
+        }"
+      ></textarea>
+      <small class="text-secondary"
+        >Cantidad de caracteres {{ getFormFieldValue("alcance").length }} de
+        {{ this.limitText }}
+      </small>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Justifición</label>
+      <textarea
+        class="form-control"
+        rows="5"
+        formControlName="justificacion"
+        placeholder="Escriba la Justificación"
+        [maxlength]="limitText"
+        [ngClass]="{
+          'is-invalid': isInvalid('justificacion'),
+          'is-valid': isValid('justificacion')
+        }"
+      ></textarea>
+      <small class="text-secondary"
+        >Cantidad de caracteres
+        {{ getFormFieldValue("justificacion").length }} de
+        {{ this.limitText }}
+      </small>
+    </div>
+
+    <ng-container *ngIf="!propuestaId">
+      <div class="mb-3">
+        <label class="form-label fw-semibold">
+          Carta de Aceptación del Director
+        </label>
+        <input
+          class="form-control"
+          type="file"
+          accept=".pdf, .docx"
+          (change)="changeFile($event, 'cartaAceptacionDirector')"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">
+          Propuesta de Trabajo de Grado
+        </label>
+        <input
+          class="form-control"
+          type="file"
+          accept=".pdf, .docx"
+          (change)="changeFile($event, 'propuestaTrabajoGrado')"
+        />
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<app-modal-footer
+  [buttons]="propuestaId ? buttonsUpdate : buttonsCreate"
+  (clicker)="clickEvents($event)"
+></app-modal-footer>

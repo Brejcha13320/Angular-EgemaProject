@@ -1,0 +1,13 @@
+<p>inicio works!</p>
+
+<h1>Usuario</h1>
+
+<pre *ngIf="user">
+  {{ user | json }}
+</pre>
+
+<app-button
+  [text]="'Cerrar Sesión'"
+  [clase]="'danger'"
+  (clicker)="logOut()"
+></app-button>

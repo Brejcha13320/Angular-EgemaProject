@@ -1,0 +1,32 @@
+<div class="container">
+  <ng-container *ngIf="propuestas.length > 0; else needPropuesta">
+    <ng-container *ngTemplateOutlet="informeFinalTemplate"></ng-container>
+  </ng-container>
+
+  <ng-template #needPropuesta>
+    <app-alert
+      [title]="titleNeedPropuesta"
+      [text]="textNeedPropuesta"
+      [type]="'warning'"
+    ></app-alert>
+  </ng-template>
+</div>
+
+<ng-template #informeFinalTemplate>
+  <ng-container *ngIf="informeFinal.length; else notData"> </ng-container>
+
+  <ng-template #notData>
+    <div class="d-flex justify-content-end my-3">
+      <app-button
+        [text]="'Crear Informe Final'"
+        (clicker)="openModalCreateInformeFinal()"
+      ></app-button>
+    </div>
+
+    <app-alert
+      [title]="titleNeedInformeFinal"
+      [text]="textNeedInformeFinal"
+      [type]="'warning'"
+    ></app-alert>
+  </ng-template>
+</ng-template>

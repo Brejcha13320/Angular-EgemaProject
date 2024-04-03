@@ -1,0 +1,10 @@
+<div class="modal-footer">
+  <app-button
+    *ngFor="let button of buttons"
+    [idButton]="button.idButton"
+    [text]="button.text"
+    [icon]="button.icon ?? ''"
+    [clase]="button.clase"
+    (clicker)="onEmit($event)"
+  ></app-button>
+</div>

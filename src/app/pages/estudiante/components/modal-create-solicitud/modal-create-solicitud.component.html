@@ -1,0 +1,46 @@
+<app-modal-header [title]="title" (clicker)="close()"></app-modal-header>
+
+<div class="modal-body">
+  <div *ngIf="form" class="container" [formGroup]="form">
+    <div class="input-group mb-3">
+      <span class="input-group-text"
+        >Selecciona una Opción de Trabajo de Grado</span
+      >
+      <select
+        class="form-select"
+        formControlName="opcion"
+        [ngClass]="{
+          'is-invalid': isInvalid('opcion'),
+          'is-valid': isValid('opcion')
+        }"
+      >
+        <option value="" selected disabled>Seleccione una Opción</option>
+        <option value="TRABAJO_GRADO">Trabajo Grado</option>
+        <option value="INVESTIGACION" disabled>Investigación</option>
+        <option value="ESPECIALIZACION" disabled>Especialización</option>
+        <option value="PRUEBAS_SABER_PRO" disabled>Pruebas Saber Pro</option>
+      </select>
+    </div>
+
+    <ng-container *ngIf="opcion" [ngSwitch]="opcion">
+      <ng-container *ngSwitchCase="'TRABAJO_GRADO'">
+        <app-alert
+          [title]="getTitle('TRABAJO_GRADO')"
+          [text]="getText('TRABAJO_GRADO')"
+          [type]="'warning'"
+        ></app-alert>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="'INVESTIGACION'"></ng-container>
+
+      <ng-container *ngSwitchCase="'ESPECIALIZACION'"></ng-container>
+
+      <ng-container *ngSwitchCase="'PRUEBAS_SABER_PRO'"></ng-container>
+    </ng-container>
+  </div>
+</div>
+
+<app-modal-footer
+  [buttons]="buttons"
+  (clicker)="clickEvents($event)"
+></app-modal-footer>

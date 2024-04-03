@@ -1,0 +1,82 @@
+<div *ngIf="form" class="login-container">
+  <div class="login-card animate__animated animate__fadeInDown">
+    <div class="card login-card">
+      <div class="card-header login-card-header">
+        <h3 class="text-center">Iniciar Sesión</h3>
+      </div>
+      <div class="card-body login-card-body">
+        <form [formGroup]="form">
+          <div class="mb-3">
+            <label for="email" class="form-label">Correo Electrónico</label>
+            <input
+              type="text"
+              class="form-control"
+              id="email"
+              name="email"
+              placeholder="Ingrese el Email"
+              formControlName="email"
+              [ngClass]="{
+                'is-invalid': isInvalid('email'),
+                'is-valid': isValid('email')
+              }"
+            />
+            <small *ngIf="isInvalid('email')" class="text-danger">
+              El email es obligatorio
+            </small>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              placeholder="Ingrese la Contraseña"
+              formControlName="password"
+              [ngClass]="{
+                'is-invalid': isInvalid('password'),
+                'is-valid': isValid('password')
+              }"
+            />
+            <div *ngIf="isInvalid('password')" class="invalid-feedback">
+              La contraseña es obligatoria
+            </div>
+          </div>
+          <div class="mb-3 form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              name="rememberEmail"
+              [(ngModel)]="rememberEmail"
+              [ngModelOptions]="{ standalone: true }"
+            />
+            <label class="form-check-label" for="remember"
+              >Recordar Email</label
+            >
+          </div>
+          <div class="d-flex flex-column gap-3">
+            <app-button
+              [text]="'Iniciar Sesión'"
+              [clase]="'primary'"
+              [idButton]="'login'"
+              [widthType]="'full'"
+              (clicker)="login()"
+            ></app-button>
+            <app-button
+              [text]="'Registrarse'"
+              [clase]="'primary'"
+              [idButton]="'register'"
+              [widthType]="'full'"
+              (clicker)="redirectTo('/auth/register')"
+            ></app-button>
+          </div>
+        </form>
+        <div class="mt-3 text-center">
+          <a class="forgot-password-link" (click)="redirectTo('/auth/recovery')"
+            >¿Olvidaste tu contraseña?</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

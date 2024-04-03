@@ -1,0 +1,42 @@
+<div class="mb-5">
+  <app-title-section [title]="title" [message]="message"></app-title-section>
+</div>
+
+<div ngbAccordion [closeOthers]="true">
+  <div ngbAccordionItem>
+    <h2 ngbAccordionHeader>
+      <button class="fw-semibold" ngbAccordionButton>Solicitud</button>
+    </h2>
+    <div ngbAccordionCollapse>
+      <div ngbAccordionBody>
+        <ng-template>
+          <app-solicitud-trabajo-grado></app-solicitud-trabajo-grado>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <div ngbAccordionItem>
+    <h2 ngbAccordionHeader>
+      <button class="fw-semibold" ngbAccordionButton>Propuesta</button>
+    </h2>
+    <div ngbAccordionCollapse>
+      <div ngbAccordionBody>
+        <ng-template>
+          <app-propuesta></app-propuesta>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <div ngbAccordionItem>
+    <h2 ngbAccordionHeader>
+      <button class="fw-semibold" ngbAccordionButton>Informe Final</button>
+    </h2>
+    <div ngbAccordionCollapse>
+      <div ngbAccordionBody>
+        <ng-template>
+          <app-informe-final></app-informe-final>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

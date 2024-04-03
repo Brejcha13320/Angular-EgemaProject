@@ -1,0 +1,19 @@
+<ng-container *ngIf="isLoading$ | async">
+  <div
+    class="d-flex justify-content-center align-items-center vh-100 position-fixed w-100 h-100 bg-white"
+    style="z-index: 1000; opacity: 0.9"
+  >
+    <div class="d-flex flex-column align-items-center">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <h4 class="card-title mb-3 mt-3">{{ message }}</h4>
+    </div>
+    <ngb-progressbar
+      *ngIf="isPercent$ | async"
+      class="mb-3 ms-3"
+      [value]="(isPercent$ | async)!"
+      type="success"
+    ></ngb-progressbar>
+  </div>
+</ng-container>

@@ -1,0 +1,54 @@
+<app-title-section [title]="title" [message]="message"></app-title-section>
+
+<div
+  class="mt-5 border-top border-end border-start p-2 d-flex justify-content-between px-4 py-4"
+>
+  <h4 class="fw-light">Listado de Propuestas de Trabajo de Grado</h4>
+</div>
+<table *ngIf="dataTable" class="table table-striped border">
+  <thead>
+    <tr>
+      <th
+        *ngFor="let headerTable of headersTable"
+        class="text-center"
+        scope="col"
+      >
+        {{ headerTable }}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of dataTable">
+      <td scope="row">
+        <app-item-email
+          [email]="data.solicitudTrabajoGrado.estudiante.email"
+        ></app-item-email>
+      </td>
+      <td scope="row">
+        {{ data.solicitudTrabajoGrado.estudiante.nombre | titlecase }}
+      </td>
+      <td class="text-center">
+        <app-badge
+          [title]="data.estado | i18nSelect : estadoMap"
+          [clase]="convertClaseColor(data.estado | i18nSelect : estadoClassMap)"
+        ></app-badge>
+      </td>
+      <td>{{ data.createdAt | date }}</td>
+      <td class="text-center">
+        <app-button
+          [outline]="true"
+          [icon]="'pencil'"
+          [tooltip]="'Editar'"
+          [idButton]="'editar'"
+          (clicker)="emitEvents($event, data.id)"
+        ></app-button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<app-alert
+  *ngIf="dataTable?.length === 0"
+  [title]="emptyDataTableTitle"
+  [text]="emptyDataTableText"
+></app-alert>

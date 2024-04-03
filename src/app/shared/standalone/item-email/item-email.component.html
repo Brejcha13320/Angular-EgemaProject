@@ -1,0 +1,10 @@
+<ng-container *ngIf="email">
+  <span
+    class="email me-2 d-inline-flex justify-content-center align-items-center rounded-circle"
+  >
+    <span class="">
+      {{ email.charAt(0) | uppercase }}
+    </span>
+  </span>
+  <span>{{ email }}</span>
+</ng-container>

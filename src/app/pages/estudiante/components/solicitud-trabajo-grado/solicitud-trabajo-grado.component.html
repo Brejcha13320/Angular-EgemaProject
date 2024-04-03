@@ -1,0 +1,59 @@
+<div class="container">
+  <ng-container *ngIf="solicitudesTrabajoGrado.length; else notData">
+    <table class="table table-bordered mt-4">
+      <thead class="bg-danger">
+        <tr>
+          <th *ngFor="let headerTable of headersTable">
+            {{ headerTable }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let solicitudTrabajoGrado of solicitudesTrabajoGrado">
+          <td>
+            <app-item-email
+              [email]="solicitudTrabajoGrado.estudiante.email"
+            ></app-item-email>
+          </td>
+          <td>{{ solicitudTrabajoGrado.estudiante.nombre }}</td>
+          <td>
+            <app-badge
+              [title]="solicitudTrabajoGrado.opcion | i18nSelect : estadoMap"
+              [clase]="
+                convertClaseColor(
+                  solicitudTrabajoGrado.opcion | i18nSelect : estadoClassMap
+                )
+              "
+            ></app-badge>
+          </td>
+          <td>{{ solicitudTrabajoGrado.createdAt | date }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-container [ngSwitch]="solicitudesTrabajoGrado[0].opcion">
+      <app-alert
+        *ngSwitchCase="'TRABAJO_GRADO'"
+        [title]="'¡Avancemos hacia el siguiente paso!'"
+        [text]="
+          'El paso que sigue consiste en desarrollar y elaborar la propuesta para tu trabajo de grado. Este documento será fundamental, ya que proporcionará una descripción detallada de tu investigación, incluyendo el título, la descripción del problema a abordar, la justificación de tu estudio, los objetivos que persigues alcanzar, el alcance de tu investigación, entre otros aspectos relevantes.'
+        "
+        [type]="'primary'"
+      ></app-alert>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #notData>
+    <div class="d-flex justify-content-end my-3">
+      <app-button
+        [text]="'Crear Solicitud'"
+        (clicker)="openModalCreateSolicitud()"
+      ></app-button>
+    </div>
+
+    <app-alert
+      [title]="titleNeedSolicitud"
+      [text]="textNeedSolicitud"
+      [type]="'warning'"
+    ></app-alert>
+  </ng-template>
+</div>

@@ -1,0 +1,23 @@
+<div
+  class="d-flex flex-column flex-shrink-0 p-3 bg-light h-100 sidebar"
+  style="width: 280px"
+>
+  <div class="d-flex justify-content-center align-items-center">
+    <img
+      class="rounded"
+      width="50"
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Uceva_Vertical_%28png%29.png/1200px-Uceva_Vertical_%28png%29.png"
+      alt=""
+    />
+    <h5 class="ms-3">EGEMA PROJECT</h5>
+  </div>
+
+  <ul class="nav nav-pills flex-column mb-auto mt-4">
+    <li *ngFor="let option of menuUser" class="nav-item mb-1">
+      <a class="nav-link" [routerLink]="option.url" routerLinkActive="active">
+        <i class="bi" [class]="'bi-' + option.bootstrapIcon"></i>
+        {{ option.title }}
+      </a>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,169 @@
+<div class="mb-5">
+  <app-title-section [title]="title" [message]="message"></app-title-section>
+</div>
+
+<div class="d-flex justify-content-end">
+  <app-button [text]="nameRedirect" (clicker)="emitRedirect()"></app-button>
+</div>
+
+<ng-container *ngIf="propuesta; else notPropuesta"></ng-container>
+<ng-template #notPropuesta>
+  <app-alert
+    [title]="titleNotPropuesta"
+    [text]="textNotPropuesta"
+    [type]="'dark'"
+  ></app-alert>
+</ng-template>
+
+<div *ngIf="propuesta">
+  <div class="border rounded p-3 mt-4">
+    <div>
+      <h5>Información General</h5>
+    </div>
+    <table class="table table-bordered mt-4">
+      <tbody>
+        <tr>
+          <th>Email</th>
+          <td>{{ propuesta.solicitudTrabajoGrado.estudiante.email }}</td>
+        </tr>
+        <tr>
+          <th>Nombre</th>
+          <td>{{ propuesta.solicitudTrabajoGrado.estudiante.nombre }}</td>
+        </tr>
+        <tr>
+          <th>Rol</th>
+          <td>
+            <app-badge
+              [title]="
+                propuesta.solicitudTrabajoGrado.estudiante.rol
+                  | i18nSelect : estadoMap
+              "
+              [clase]="
+                convertClaseColor(
+                  propuesta.solicitudTrabajoGrado.estudiante.rol
+                    | i18nSelect : estadoClassMap
+                )
+              "
+            ></app-badge>
+          </td>
+        </tr>
+        <tr>
+          <th>Estado</th>
+          <td>
+            <app-badge
+              [title]="propuesta.estado | i18nSelect : estadoMap"
+              [clase]="
+                convertClaseColor(
+                  propuesta.estado | i18nSelect : estadoClassMap
+                )
+              "
+            ></app-badge>
+          </td>
+        </tr>
+        <tr>
+          <th>Línea de Investigación</th>
+          <td>
+            <app-badge
+              [title]="propuesta.lineaInvestigacion | i18nSelect : estadoMap"
+              [clase]="
+                convertClaseColor(
+                  propuesta.lineaInvestigacion | i18nSelect : estadoClassMap
+                )
+              "
+            ></app-badge>
+          </td>
+        </tr>
+        <tr>
+          <th>Fecha de Creación</th>
+          <td>
+            <app-badge
+              [clase]="'success'"
+              [title]="(propuesta.createdAt | date) ?? ''"
+            ></app-badge>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="border rounded p-3 mt-4">
+    <div>
+      <h5>Documentos</h5>
+    </div>
+    <table class="table table-bordered mt-4">
+      <tbody>
+        <tr *ngFor="let file of propuesta.files; index as i">
+          <th>
+            <ng-container [ngSwitch]="i">
+              <ng-container *ngSwitchCase="0">
+                Carta de Aceptación Director
+              </ng-container>
+              <ng-container *ngSwitchCase="1"> Propuesta</ng-container>
+            </ng-container>
+          </th>
+          <td>
+            <div class="d-flex gap-3">
+              <p>{{ file.name }}</p>
+              <app-button
+                [outline]="true"
+                [icon]="'cloud-download'"
+                [tooltip]="'Descargar'"
+                (clicker)="downloadFile(file.id)"
+              ></app-button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="border rounded p-3 mt-4">
+    <div>
+      <h5>Titulo</h5>
+    </div>
+    <p>{{ propuesta.titulo }}</p>
+  </div>
+
+  <div class="border rounded p-3 mt-4">
+    <div>
+      <h5>Objetivo</h5>
+    </div>
+    <p>{{ propuesta.objetivo }}</p>
+  </div>
+
+  <div class="border rounded p-3 mt-4">
+    <div>
+      <h5>Problema</h5>
+    </div>
+    <p>{{ propuesta.problema }}</p>
+  </div>
+
+  <div class="border rounded p-3 mt-4">
+    <div>
+      <h5>Justificación</h5>
+    </div>
+    <p>{{ propuesta.justificacion }}</p>
+  </div>
+
+  <div class="border rounded p-3 mt-4">
+    <div>
+      <h5>Alcance</h5>
+    </div>
+    <p>{{ propuesta.alcance }}</p>
+  </div>
+
+  <div *ngIf="shwoCometarios" class="border rounded p-3 mt-4">
+    <div>
+      <h5>Comentarios</h5>
+    </div>
+    <p *ngIf="propuesta.comentarios; else noComentarios">
+      {{ propuesta.comentarios }}
+    </p>
+    <ng-template #noComentarios>
+      <app-alert
+        [title]="'No tienes comentarios'"
+        [text]="'No se han agregado comentarios a esta propuesta.'"
+      ></app-alert>
+    </ng-template>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<header class="py-3 border-bottom h-100 d-flex align-items-center">
+  <div
+    class="container-fluid d-grid gap-3 align-items-center"
+    style="grid-template-columns: 1fr 2fr"
+  >
+    <div></div>
+
+    <div class="d-flex align-items-center">
+      <div class="w-100"></div>
+      <div class="me-3">
+        <app-badge
+          [title]="rolUser | i18nSelect : estadoMap"
+          [clase]="convertClaseColor(rolUser | i18nSelect : estadoClassMap)"
+        ></app-badge>
+      </div>
+      <div class="flex-shrink-0 dropdown">
+        <a
+          href="#"
+          class="d-block link-dark text-decoration-none dropdown-toggle"
+          id="dropdownUser2"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img
+            src="https://i.scdn.co/image/ab6761610000e5eb33c9b5dcc05194199aa68410"
+            alt="mdo"
+            width="32"
+            height="32"
+            class="rounded-circle me-2"
+          />
+          {{ nameUser | uppercase }}
+        </a>
+        <ul
+          class="dropdown-menu text-small shadow"
+          aria-labelledby="dropdownUser2"
+        >
+          <li><a class="dropdown-item poin">Editar Perfil</a></li>
+          <li>
+            <a class="dropdown-item poin" (click)="logOut()">Cerrar Sesión</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>

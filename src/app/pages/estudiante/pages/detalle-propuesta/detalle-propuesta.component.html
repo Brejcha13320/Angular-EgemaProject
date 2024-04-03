@@ -1,0 +1,11 @@
+<ng-container *ngIf="propuesta">
+  <app-detail-propuesta
+    [title]="title"
+    [message]="message"
+    [titleNotPropuesta]="titleNotPropuesta"
+    [textNotPropuesta]="textNotPropuesta"
+    [propuesta]="propuesta"
+    [nameRedirect]="nameRedirect"
+    (redirect)="redirect()"
+  ></app-detail-propuesta>
+</ng-container>

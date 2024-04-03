@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap");
+@import "variables";
+
+.sidebar {
+  border-right: 4px solid $info;
+
+  h5 {
+    font-family: "Fredoka", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+  }
+
+  a:hover {
+    background-color: $primary;
+    color: $white;
+  }
+}

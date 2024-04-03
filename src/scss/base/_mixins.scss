@@ -1,0 +1,7 @@
+@mixin scroll-custom($axisX, $axisY, $color) {
+  overflow-x: $axisX;
+  overflow-y: $axisY;
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+  scrollbar-color: $color $primary-light;
+}

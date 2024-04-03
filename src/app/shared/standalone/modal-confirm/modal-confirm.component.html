@@ -1,0 +1,10 @@
+<app-modal-header [title]="title" (clicker)="close(null)"></app-modal-header>
+
+<div class="modal-body">
+  <p class="text-justify">{{ text }}</p>
+</div>
+
+<app-modal-footer
+  [buttons]="buttons"
+  (clicker)="close($event)"
+></app-modal-footer>

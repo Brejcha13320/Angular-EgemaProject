@@ -1,0 +1,14 @@
+@import "variables";
+
+.email {
+  height: 1.5rem;
+  width: 1.5rem;
+  background-color: $item-email-bg;
+
+  span {
+    font-size: 0.75rem;
+    line-height: 1;
+    font-weight: 500;
+    color: $item-email-color;
+  }
+}
