@@ -53,17 +53,8 @@ export class EstudiantePropuestaService {
    * @param data data para crear la propuesta
    * @returns returna una promesa con la propuesta creada
    */
-  async createPropuesta(data: CreatePropuesta): Promise<Propuesta> {
-    const headers = new Headers();
-    const token = this.tokenService.getToken();
+  createPropuesta(data: CreatePropuesta): Observable<Propuesta> {
     const userId = this.authService.getUser()?.id;
-
-    if (token === '' || !token) {
-      throw Error('Token not found');
-    }
-
-    headers.append('Authorization', `Bearer ${token}`);
-    headers.append('Accept', '*/*');
 
     const body = new FormData();
 
@@ -79,16 +70,7 @@ export class EstudiantePropuestaService {
     body.append('cartaAceptacionDirector', data.cartaAceptacionDirector);
     body.append('propuestaTrabajoGrado', data.propuestaTrabajoGrado);
 
-    const response = await fetch(
-      `${environment.apiBaseUrl}/api/propuesta/estudiante`,
-      {
-        method: 'POST',
-        body,
-        headers,
-      }
-    );
-
-    return await response.json();
+    return this.http.post<Propuesta>(`/propuesta/estudiante`, body);
   }
 
   updatePropuesta(

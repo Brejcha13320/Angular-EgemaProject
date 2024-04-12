@@ -12,6 +12,7 @@ import { ClaseColor } from '@interfaces/clase-color.interface';
 import { Dropdown } from '@interfaces/dropdown.interface';
 import { ModalConfirmComponent } from '@standalone/modal-confirm/modal-confirm.component';
 import { ButtonModalFooter } from '@interfaces/modal.inteface';
+import { ModalUpdateArchivosComponent } from '../modal-update-archivos/modal-update-archivos.component';
 
 @Component({
   selector: 'app-propuesta',
@@ -149,6 +150,7 @@ export class PropuestaComponent implements OnInit {
 
   /**
    * Abre el modal para crear la propuesta
+   * @param propuestaId id de la propuesta
    */
   openModalCreatePropuesta(propuestaId?: string) {
     const modalRef = this.modalService.open(ModalCreatePropuestaComponent, {
@@ -164,6 +166,24 @@ export class PropuestaComponent implements OnInit {
       modalRef.componentInstance.propuestaId = propuestaId;
     }
 
+    modalRef.result.then((status) => {
+      if (status) {
+        this.getData();
+      }
+    });
+  }
+
+  /**
+   * Abre el modal para editar los archivos
+   * @param propuestaId id de la propuesta
+   */
+  openModalUpdateArchivos(propuestaId: string) {
+    const modalRef = this.modalService.open(ModalUpdateArchivosComponent, {
+      centered: true,
+      scrollable: true,
+      size: 'lg',
+    });
+    modalRef.componentInstance.propuestaId = propuestaId;
     modalRef.result.then((status) => {
       if (status) {
         this.getData();
@@ -205,6 +225,7 @@ export class PropuestaComponent implements OnInit {
           });
           return;
         }
+        this.openModalUpdateArchivos(propuestaId);
         break;
       case 'update-pendiente':
         if (!propuestaId || estado != 'CAMBIOS') {

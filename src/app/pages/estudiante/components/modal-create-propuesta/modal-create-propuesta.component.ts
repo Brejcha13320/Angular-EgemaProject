@@ -216,23 +216,23 @@ export class ModalCreatePropuestaComponent implements OnInit {
       return;
     }
 
-    this.estudiantePropuestaService
-      .createPropuesta(this.form.value)
-      .then(() => {
+    this.estudiantePropuestaService.createPropuesta(this.form.value).subscribe({
+      next: () => {
         this.notifyService.open({
           clase: 'success',
           title: 'Proceso Exitoso',
           message: 'Se ha creado la propuesta de manera exitosa',
         });
         this.close(true);
-      })
-      .catch(() => {
+      },
+      error: () => {
         this.notifyService.open({
           clase: 'alert',
           title: 'Error al crear la Propuesta',
           message: 'Ha ocurrido un error al intentar crear la propuesta',
         });
-      });
+      },
+    });
   }
 
   /**

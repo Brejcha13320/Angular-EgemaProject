@@ -21,6 +21,7 @@ import { ModalCreatePropuestaComponent } from './components/modal-create-propues
 import { ModalCreateSolicitudComponent } from './components/modal-create-solicitud/modal-create-solicitud.component';
 import { DetailPropuestaComponent } from '@standalone/detail-propuesta/detail-propuesta.component';
 import { InformeFinalComponent } from './components/informe-final/informe-final.component';
+import { ModalUpdateArchivosComponent } from './components/modal-update-archivos/modal-update-archivos.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { InformeFinalComponent } from './components/informe-final/informe-final.
     DetallePropuestaComponent,
     ModalCreatePropuestaComponent,
     InformeFinalComponent,
+    ModalUpdateArchivosComponent,
   ],
   imports: [
     NgbModule,

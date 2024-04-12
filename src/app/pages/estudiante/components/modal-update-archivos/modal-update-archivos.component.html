@@ -1,0 +1,78 @@
+<app-modal-header
+  [title]="'Actualizar Archivos Propuesta'"
+  (clicker)="close()"
+></app-modal-header>
+
+<div class="modal-body">
+  <div *ngIf="propuesta" class="border rounded p-3 mt-4">
+    <div>
+      <h5>Documentos</h5>
+    </div>
+
+    <table class="table table-bordered mt-4">
+      <tbody>
+        <tr>
+          <th class="text-center" colspan="2">Carta de Aceptación Director</th>
+        </tr>
+        <tr>
+          <th>Descargar</th>
+          <td>
+            <div class="d-flex gap-3">
+              <p>{{ getFileName(propuesta.cartaAceptacionDirector) }}</p>
+              <app-button
+                [outline]="true"
+                [icon]="'cloud-download'"
+                [tooltip]="'Descargar'"
+                (clicker)="downloadFile(propuesta.cartaAceptacionDirector)"
+              ></app-button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th>Editar</th>
+          <td>
+            <input
+              class="form-control"
+              type="file"
+              accept=".pdf, .docx"
+              (change)="changeFile($event, 'cartaAceptacionDirector')"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table table-bordered mt-4">
+      <tbody>
+        <tr>
+          <th class="text-center" colspan="2">Propuesta</th>
+        </tr>
+        <tr>
+          <th>Descargar</th>
+          <td>
+            <div class="d-flex gap-3">
+              <p>{{ getFileName(propuesta.propuestaTrabajoGrado) }}</p>
+              <app-button
+                [outline]="true"
+                [icon]="'cloud-download'"
+                [tooltip]="'Descargar'"
+                (clicker)="downloadFile(propuesta.propuestaTrabajoGrado)"
+              ></app-button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th>Editar</th>
+          <td>
+            <input
+              class="form-control"
+              type="file"
+              accept=".pdf, .docx"
+              (change)="changeFile($event, 'propuestaTrabajoGrado')"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
