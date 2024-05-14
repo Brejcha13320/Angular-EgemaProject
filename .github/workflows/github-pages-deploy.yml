@@ -33,6 +33,7 @@ jobs:
         run: |
           environment=$(echo "${{ secrets.ENVIRONMENT }}" | base64 --decode)
           echo "$environment" > .env
+          ls -l
           npm run build
           ls -l
 
