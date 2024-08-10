@@ -94,21 +94,23 @@
       <tbody>
         <tr *ngFor="let file of propuesta.files; index as i">
           <th>
-            <ng-container [ngSwitch]="i">
-              <ng-container *ngSwitchCase="0">
+            <ng-container [ngSwitch]="file.tipo">
+              <ng-container *ngSwitchCase="'CARTA_ACEPTACION_DIRECTOR'">
                 Carta de Aceptación Director
               </ng-container>
-              <ng-container *ngSwitchCase="1"> Propuesta</ng-container>
+              <ng-container *ngSwitchCase="'PROPUESTA_TRABAJO_GRADO'">
+                Propuesta</ng-container
+              >
             </ng-container>
           </th>
           <td>
             <div class="d-flex gap-3">
-              <p>{{ file.name }}</p>
+              <p>{{ file.file.name }}</p>
               <app-button
                 [outline]="true"
                 [icon]="'cloud-download'"
                 [tooltip]="'Descargar'"
-                (clicker)="downloadFile(file.id)"
+                (clicker)="downloadFile(file.file.id)"
               ></app-button>
             </div>
           </td>

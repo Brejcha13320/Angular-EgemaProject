@@ -18,12 +18,12 @@
           <th>Descargar</th>
           <td>
             <div class="d-flex gap-3">
-              <p>{{ getFileName(propuesta.cartaAceptacionDirector) }}</p>
+              <p>{{ getFileName("CARTA_ACEPTACION_DIRECTOR") }}</p>
               <app-button
                 [outline]="true"
                 [icon]="'cloud-download'"
                 [tooltip]="'Descargar'"
-                (clicker)="downloadFile(propuesta.cartaAceptacionDirector)"
+                (clicker)="downloadFile(getFileId('CARTA_ACEPTACION_DIRECTOR'))"
               ></app-button>
             </div>
           </td>
@@ -35,12 +35,19 @@
               class="form-control"
               type="file"
               accept=".pdf, .docx"
-              (change)="changeFile($event, 'cartaAceptacionDirector')"
+              (change)="changeFile($event, 'CARTA_ACEPTACION_DIRECTOR')"
             />
           </td>
         </tr>
       </tbody>
     </table>
+    <div *ngIf="cartaAceptacionFile" class="d-flex justify-content-end">
+      <app-button
+        [text]="'Actualizar Carta Aceptación'"
+        [clase]="'success'"
+        (clicker)="updatePropuestaFile('CARTA_ACEPTACION_DIRECTOR')"
+      ></app-button>
+    </div>
 
     <table class="table table-bordered mt-4">
       <tbody>
@@ -51,12 +58,12 @@
           <th>Descargar</th>
           <td>
             <div class="d-flex gap-3">
-              <p>{{ getFileName(propuesta.propuestaTrabajoGrado) }}</p>
+              <p>{{ getFileName("PROPUESTA_TRABAJO_GRADO") }}</p>
               <app-button
                 [outline]="true"
                 [icon]="'cloud-download'"
                 [tooltip]="'Descargar'"
-                (clicker)="downloadFile(propuesta.propuestaTrabajoGrado)"
+                (clicker)="downloadFile(getFileId('PROPUESTA_TRABAJO_GRADO'))"
               ></app-button>
             </div>
           </td>
@@ -68,11 +75,18 @@
               class="form-control"
               type="file"
               accept=".pdf, .docx"
-              (change)="changeFile($event, 'propuestaTrabajoGrado')"
+              (change)="changeFile($event, 'PROPUESTA_TRABAJO_GRADO')"
             />
           </td>
         </tr>
       </tbody>
     </table>
+    <div *ngIf="propuestaTrabajoGradoFile" class="d-flex justify-content-end">
+      <app-button
+        [text]="'Actualizar Propuesta'"
+        [clase]="'success'"
+        (clicker)="updatePropuestaFile('PROPUESTA_TRABAJO_GRADO')"
+      ></app-button>
+    </div>
   </div>
 </div>
