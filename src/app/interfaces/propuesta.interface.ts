@@ -1,6 +1,5 @@
 import { File } from './file.interface';
 import { SolicitudTrabajoGrado } from './solicitud-trabajo-grado.interface';
-
 export interface Propuesta {
   id: string;
   solicitudTrabajoGradoId: string;
@@ -12,12 +11,18 @@ export interface Propuesta {
   objetivo: string;
   alcance: string;
   comentarios: string;
-  cartaAceptacionDirector: string;
-  propuestaTrabajoGrado: string;
   createdAt: Date;
   updatedAt: Date;
   solicitudTrabajoGrado: SolicitudTrabajoGrado;
-  files: File[];
+  files: PropuestaFile[];
+}
+
+export interface PropuestaFile {
+  id: string;
+  fileId: string;
+  propuestaId: string;
+  tipo: TipoPropuestaFile;
+  file: File;
 }
 
 export interface CreatePropuesta
@@ -57,3 +62,7 @@ export type EstadoPropuesta =
   | 'PENDIENTE'
   | 'CAMBIOS'
   | 'NO_APROBADO';
+
+export type TipoPropuestaFile =
+  | 'CARTA_ACEPTACION_DIRECTOR'
+  | 'PROPUESTA_TRABAJO_GRADO';

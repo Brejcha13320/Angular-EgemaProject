@@ -3,7 +3,7 @@ import { FormBuilder, FormControl } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotifyService } from '@shared-services/notify.service';
 import { EstudiantePropuestaService } from '../../services/estudiante-propuesta.service';
-import { Propuesta } from '@interfaces/propuesta.interface';
+import { Propuesta, TipoPropuestaFile } from '@interfaces/propuesta.interface';
 import { TokenService } from '@auth-services/token.service';
 import { environment } from '@environments/environment';
 
@@ -82,12 +82,22 @@ export class ModalUpdateArchivosComponent implements OnInit {
   }
 
   /**
-   * Recibe el id del file y retorna le nombre
+   * Recibe el tipo del file y retorna le nombre
    * @param id id del file
    * @returns nombre del file
    */
-  getFileName(id: string) {
-    return this.propuesta?.files.find((file) => id === file.id)?.name;
+  getFileName(tipo: TipoPropuestaFile) {
+    return this.propuesta?.files.find((file) => tipo === file.tipo)?.file.name;
+  }
+
+  /**
+   * Recibe el tipo del file y retorna le id
+   * @param id id del file
+   * @returns nombre del file
+   */
+  getFileId(tipo: TipoPropuestaFile) {
+    return this.propuesta?.files.find((file) => tipo === file.tipo)?.file
+      .id as string;
   }
 
   /**

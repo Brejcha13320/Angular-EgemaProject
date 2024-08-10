@@ -18,12 +18,12 @@
           <th>Descargar</th>
           <td>
             <div class="d-flex gap-3">
-              <p>{{ getFileName(propuesta.cartaAceptacionDirector) }}</p>
+              <p>{{ getFileName("CARTA_ACEPTACION_DIRECTOR") }}</p>
               <app-button
                 [outline]="true"
                 [icon]="'cloud-download'"
                 [tooltip]="'Descargar'"
-                (clicker)="downloadFile(propuesta.cartaAceptacionDirector)"
+                (clicker)="downloadFile(getFileId('CARTA_ACEPTACION_DIRECTOR'))"
               ></app-button>
             </div>
           </td>
@@ -51,12 +51,12 @@
           <th>Descargar</th>
           <td>
             <div class="d-flex gap-3">
-              <p>{{ getFileName(propuesta.propuestaTrabajoGrado) }}</p>
+              <p>{{ getFileName("PROPUESTA_TRABAJO_GRADO") }}</p>
               <app-button
                 [outline]="true"
                 [icon]="'cloud-download'"
                 [tooltip]="'Descargar'"
-                (clicker)="downloadFile(propuesta.propuestaTrabajoGrado)"
+                (clicker)="downloadFile(getFileId('PROPUESTA_TRABAJO_GRADO'))"
               ></app-button>
             </div>
           </td>
