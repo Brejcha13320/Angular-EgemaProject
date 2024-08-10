@@ -34,7 +34,7 @@ export class ModalUpdateArchivosComponent implements OnInit {
     public activeModal: NgbActiveModal,
     private notifyService: NotifyService,
     private estudiantePropuestaService: EstudiantePropuestaService
-  ) {}
+  ) { }
 
   /**
    * Llama la función para crear el formulario

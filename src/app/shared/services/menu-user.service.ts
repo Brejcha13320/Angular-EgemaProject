@@ -55,7 +55,7 @@ export class MenuUserService {
     {
       title: 'Reuniones',
       bootstrapIcon: 'calendar-x',
-      url: '/inicio',
+      url: '/comite/reuniones',
     },
     {
       title: 'Propuestas',
@@ -65,12 +65,12 @@ export class MenuUserService {
     {
       title: 'Informe final',
       bootstrapIcon: 'journal',
-      url: '/inicio',
+      url: '/comite/informe-final',
     },
     {
       title: 'Sustentación',
       bootstrapIcon: 'person-check',
-      url: '/inicio',
+      url: '/comite/sustentacion',
     }
   ];
 

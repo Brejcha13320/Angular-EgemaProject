@@ -14,12 +14,16 @@ import { DetailPropuestaComponent } from '@standalone/detail-propuesta/detail-pr
 import { ButtonComponent } from '@standalone/button/button.component';
 import { NgBootstrap } from '@third-party/ng-bootstrap.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ReunionesComponent } from './pages/reuniones/reuniones.component';
+import { DetalleReunionComponent } from './pages/detalle-reunion/detalle-reunion.component';
 
 @NgModule({
   declarations: [
     PropuestasComponent,
     TablePropuestasComponent,
     DetallePropuestaComponent,
+    ReunionesComponent,
+    DetalleReunionComponent,
   ],
   imports: [
     CommonModule,

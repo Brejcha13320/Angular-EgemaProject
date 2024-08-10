@@ -30,7 +30,7 @@ export class DetallePropuestaComponent implements OnInit {
    */
   titleNotPropuesta = 'No existe la Propuesta';
   /**
-   * Mensaje de la alerta si no cuentra la propuesta
+   * Mensaje de la alerta si no encuentra la propuesta
    */
   textNotPropuesta =
     'No existe la propuesta de trabajo de grado que estas intentando buscar';
@@ -63,7 +63,7 @@ export class DetallePropuestaComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private notifyService: NotifyService,
     private comitePropuestaService: ComitePropuestaService
-  ) {}
+  ) { }
 
   /**
    * Obtiene el parametro id de la url, consulta la propuesta

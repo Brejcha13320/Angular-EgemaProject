@@ -1,0 +1,29 @@
+<p>reuniones works!</p>
+<ng-container [ngSwitch]="this.status">
+  <ng-container *ngSwitchCase="'success'">
+    <!-- <app-detalle-reunion
+    [title]="title"
+    [message]="message"
+    [dataTable]="dataTable$ | async"
+    [headersTable]="headersTable"
+    (clickEvents)="$event.idButton, $event.idRow"
+    ></app-detalle-reunion>
+  </ng-container> -->
+    <ng-container *ngSwitchCase="'loading'">
+      <app-alert
+        [type]="'info'"
+        [title]="'Consultando Información.'"
+        [text]="'Estamos buscando las reuniones del comite'"
+      ></app-alert>
+    </ng-container>
+    <ng-container *ngSwitchCase="'error'">
+      <app-alert
+        [type]="'danger'"
+        [title]="'Problemas al buscar las reuniones del comite'"
+        [text]="
+          'Se han presentado problemas a la hora cargar las propuestas de trabajo de grado'
+        "
+      ></app-alert>
+    </ng-container>
+  </ng-container>
+</ng-container>
