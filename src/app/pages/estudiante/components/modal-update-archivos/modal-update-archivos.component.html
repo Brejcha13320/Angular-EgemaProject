@@ -35,12 +35,19 @@
               class="form-control"
               type="file"
               accept=".pdf, .docx"
-              (change)="changeFile($event, 'cartaAceptacionDirector')"
+              (change)="changeFile($event, 'CARTA_ACEPTACION_DIRECTOR')"
             />
           </td>
         </tr>
       </tbody>
     </table>
+    <div *ngIf="cartaAceptacionFile" class="d-flex justify-content-end">
+      <app-button
+        [text]="'Actualizar Carta Aceptación'"
+        [clase]="'success'"
+        (clicker)="updatePropuestaFile('CARTA_ACEPTACION_DIRECTOR')"
+      ></app-button>
+    </div>
 
     <table class="table table-bordered mt-4">
       <tbody>
@@ -68,11 +75,18 @@
               class="form-control"
               type="file"
               accept=".pdf, .docx"
-              (change)="changeFile($event, 'propuestaTrabajoGrado')"
+              (change)="changeFile($event, 'PROPUESTA_TRABAJO_GRADO')"
             />
           </td>
         </tr>
       </tbody>
     </table>
+    <div *ngIf="propuestaTrabajoGradoFile" class="d-flex justify-content-end">
+      <app-button
+        [text]="'Actualizar Propuesta'"
+        [clase]="'success'"
+        (clicker)="updatePropuestaFile('PROPUESTA_TRABAJO_GRADO')"
+      ></app-button>
+    </div>
   </div>
 </div>

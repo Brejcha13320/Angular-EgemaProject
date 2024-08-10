@@ -54,6 +54,7 @@ export class SpinnerInterceptor implements HttpInterceptor {
           if (event.type === HttpEventType.UploadProgress) {
             // Notifica al servicio de spinner sobre el progreso
             const progress = Math.round((100 * event.loaded) / event.total!);
+
             this.spinnerService.showPercent(progress);
           } else if (event.type === HttpEventType.Response) {
             // La solicitud se ha completado, oculta el spinner

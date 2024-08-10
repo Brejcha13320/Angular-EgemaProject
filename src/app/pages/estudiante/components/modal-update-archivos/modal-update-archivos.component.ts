@@ -6,6 +6,7 @@ import { EstudiantePropuestaService } from '../../services/estudiante-propuesta.
 import { Propuesta, TipoPropuestaFile } from '@interfaces/propuesta.interface';
 import { TokenService } from '@auth-services/token.service';
 import { environment } from '@environments/environment';
+import { ButtonModalFooter } from '@interfaces/modal.inteface';
 
 @Component({
   selector: 'app-modal-update-archivos',
@@ -21,6 +22,14 @@ export class ModalUpdateArchivosComponent implements OnInit {
    * Propuesta
    */
   propuesta: Propuesta | null = null;
+  /**
+   * File de la carta de aceptacion
+   */
+  cartaAceptacionFile: any | null = null;
+  /**
+   * File de la propuesta trabajo de grado
+   */
+  propuestaTrabajoGradoFile: any | null = null;
 
   /**
    * Constructor de la clase
@@ -105,20 +114,104 @@ export class ModalUpdateArchivosComponent implements OnInit {
    * @param e evento del file
    * @param control formulario donde se va guardar el file
    */
-  changeFile(
-    e: any,
-    control: 'cartaAceptacionDirector' | 'propuestaTrabajoGrado'
-  ) {
+  changeFile(e: any, tipo: TipoPropuestaFile) {
     const file = e.target.files[0];
-    console.log({ file });
-    switch (control) {
-      case 'cartaAceptacionDirector':
-        //Guardar File cartaAceptacionDirector
+    // console.log({ file });
+    switch (tipo) {
+      case 'CARTA_ACEPTACION_DIRECTOR':
+        //Guardar File cartaAceptacion
+        this.cartaAceptacionFile = file;
         break;
-      case 'propuestaTrabajoGrado':
+      case 'PROPUESTA_TRABAJO_GRADO':
         //Guardar File propuestaTrabajoGrado
+        this.propuestaTrabajoGradoFile = file;
         break;
     }
+  }
+
+  /**
+   * Recibe el tipo de archivo y segun el caso guarda alguno de los 2
+   * @param tipo tipo de archivo seleccionado
+   * @returns retorna null en caso de que no encuentre el file para cancelar el proceso
+   */
+  updatePropuestaFile(tipo: TipoPropuestaFile) {
+    let propuestaFileId: string | null = null;
+
+    if (!this.propuesta) return;
+
+    switch (tipo) {
+      case 'CARTA_ACEPTACION_DIRECTOR':
+        propuestaFileId = this.getPropuestaFileId('CARTA_ACEPTACION_DIRECTOR');
+
+        this.estudiantePropuestaService
+          .updatePropuestaFile(
+            this.propuesta.id,
+            propuestaFileId,
+            this.cartaAceptacionFile
+          )
+          .subscribe({
+            next: (propuesta) => {
+              this.notifyService.open({
+                clase: 'success',
+                title: 'Proceso Exitoso',
+                message:
+                  'Se ha actualizado la Carta de Aceptación de manera exitosa',
+              });
+              this.close(true);
+            },
+            error: (error) => {
+              this.notifyService.open({
+                clase: 'alert',
+                title: 'Error al actualizar el Archivo',
+                message:
+                  'Ha ocurrido un error al intentar actualizar la Carta de Aceptación',
+              });
+            },
+          });
+
+        break;
+      case 'PROPUESTA_TRABAJO_GRADO':
+        propuestaFileId = this.getPropuestaFileId('PROPUESTA_TRABAJO_GRADO');
+
+        this.estudiantePropuestaService
+          .updatePropuestaFile(
+            this.propuesta.id,
+            propuestaFileId,
+            this.propuestaTrabajoGradoFile
+          )
+          .subscribe({
+            next: (propuesta) => {
+              this.notifyService.open({
+                clase: 'success',
+                title: 'Proceso Exitoso',
+                message:
+                  'Se ha actualizado la Propuesta de Trabajo de Grado de manera exitosa',
+              });
+              this.close(true);
+            },
+            error: (error) => {
+              this.notifyService.open({
+                clase: 'alert',
+                title: 'Error al actualizar el Archivo',
+                message:
+                  'Ha ocurrido un error al intentar actualizar la Propuesta de Trabajo de Grado',
+              });
+            },
+          });
+
+        break;
+    }
+  }
+
+  /**
+   * Recibe tipo de archivo y retorna el id del propuestaFile
+   * @param tipo tipo del propuestaFile
+   * @returns retorna el id del propuestaFile
+   */
+  getPropuestaFileId(tipo: TipoPropuestaFile): string {
+    return (
+      this.propuesta?.files.filter((file) => file.tipo === tipo)[0].id || ''
+    );
   }
 
   /**

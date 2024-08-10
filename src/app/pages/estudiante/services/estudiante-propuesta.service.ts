@@ -6,6 +6,7 @@ import { environment } from '@environments/environment';
 import {
   CreatePropuesta,
   Propuesta,
+  TipoPropuestaFile,
   UpdatePropuestaEstudiante,
 } from '@interfaces/propuesta.interface';
 import { Observable } from 'rxjs';
@@ -73,10 +74,34 @@ export class EstudiantePropuestaService {
     return this.http.post<Propuesta>(`/propuesta/estudiante`, body);
   }
 
+  /**
+   * Recibe el id de la propuesta con la data nueva y actualiza la propuesta
+   * @param id id de la propuesta
+   * @param data data de la propuesta actualizada
+   * @returns retorna la propuesta actualizada
+   */
   updatePropuesta(
     id: string,
     data: UpdatePropuestaEstudiante
   ): Observable<Propuesta> {
     return this.http.put<Propuesta>(`/propuesta/estudiante/${id}`, data);
+  }
+
+  /**
+   * Recibe el id del propuestaFile, File y Tipo para actualizar el file
+   * @param id id de la propuestaFile
+   * @param file archivo seleccionado por el usuario
+   * @param tipo tipo de archivo el propuestaFile
+   * @returns retorna la propuesta actualizada con los files
+   */
+  updatePropuestaFile(
+    id: string,
+    propuestaFileId: string,
+    file: any
+  ): Observable<Propuesta> {
+    const body = new FormData();
+    body.append('propuestaFileId', propuestaFileId);
+    body.append('file', file);
+    return this.http.put<Propuesta>(`/propuesta/estudiante/file/${id}`, body);
   }
 }
