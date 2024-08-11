@@ -30,6 +30,9 @@ export class PropuestaComponent implements OnInit {
     'FECHA DE CREACIÓN',
     'OPCIONES',
   ];
+  /**
+   * Opciones de cada item en la propuesta
+   */
   dropdown: Dropdown = {
     clase: 'primary',
     options: [

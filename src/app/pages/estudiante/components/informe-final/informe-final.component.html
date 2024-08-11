@@ -13,7 +13,50 @@
 </div>
 
 <ng-template #informeFinalTemplate>
-  <ng-container *ngIf="informeFinal.length; else notData"> </ng-container>
+  <ng-container *ngIf="informesFinales.length; else notData">
+    <table class="table table-bordered mt-4">
+      <thead class="bg-danger">
+        <tr>
+          <th *ngFor="let headerTable of headersTable">
+            {{ headerTable }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let informeFinal of informesFinales">
+          <td>
+            <app-item-email
+              [email]="
+                informeFinal.propuesta.solicitudTrabajoGrado.estudiante.email
+              "
+            ></app-item-email>
+          </td>
+          <td>
+            {{ informeFinal.propuesta.solicitudTrabajoGrado.estudiante.nombre }}
+          </td>
+          <td>
+            <app-badge
+              [title]="informeFinal.estado | i18nSelect : estadoMap"
+              [clase]="
+                convertClaseColor(
+                  informeFinal.estado | i18nSelect : estadoClassMap
+                )
+              "
+            ></app-badge>
+          </td>
+          <td>{{ informeFinal.createdAt | date }}</td>
+          <td>
+            <app-dropdown
+              [dropdown]="dropdown"
+              (clicker)="
+                clickEvents($event, informeFinal.id, informeFinal.estado)
+              "
+            ></app-dropdown>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
 
   <ng-template #notData>
     <div class="d-flex justify-content-end my-3">

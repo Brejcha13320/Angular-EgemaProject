@@ -6,16 +6,7 @@
   <app-button [text]="nameRedirect" (clicker)="emitRedirect()"></app-button>
 </div>
 
-<ng-container *ngIf="propuesta; else notPropuesta"></ng-container>
-<ng-template #notPropuesta>
-  <app-alert
-    [title]="titleNotPropuesta"
-    [text]="textNotPropuesta"
-    [type]="'dark'"
-  ></app-alert>
-</ng-template>
-
-<div *ngIf="propuesta">
+<ng-container *ngIf="propuesta; else notPropuesta">
   <div class="border rounded p-3 mt-4">
     <div>
       <h5>Información General</h5>
@@ -168,4 +159,11 @@
       ></app-alert>
     </ng-template>
   </div>
-</div>
+</ng-container>
+<ng-template #notPropuesta>
+  <app-alert
+    [title]="titleNotPropuesta"
+    [text]="textNotPropuesta"
+    [type]="'dark'"
+  ></app-alert>
+</ng-template>

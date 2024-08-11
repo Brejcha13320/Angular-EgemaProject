@@ -1,0 +1,107 @@
+<app-modal-header
+  [title]="informeFinalId ? 'Actualizar Informe Final' : 'Crear Informe Final'"
+  (clicker)="close()"
+></app-modal-header>
+
+<div class="modal-body">
+  <div *ngIf="form" class="container" [formGroup]="form">
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Selecciona el Director</label>
+      <select
+        class="form-select"
+        formControlName="director"
+        [ngClass]="{
+          'is-invalid': isInvalid('director'),
+          'is-valid': isValid('director')
+        }"
+      >
+        <option value="" selected disabled>Seleccione una Opción</option>
+        <option
+          *ngFor="let usuarioDirector of usuariosDirector"
+          [value]="usuarioDirector.id"
+        >
+          {{ usuarioDirector.nombre }} - {{ usuarioDirector.email }}
+        </option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label fw-semibold"
+        >Selecciona el Coodirector (Opcional)</label
+      >
+      <select
+        class="form-select"
+        formControlName="codirector"
+        [ngClass]="{
+          'is-invalid': isInvalid('codirector'),
+          'is-valid': isValid('codirector')
+        }"
+      >
+        <option value="" selected disabled>Seleccione una Opción</option>
+        <option
+          *ngFor="let usuarioDirector of usuariosDirector"
+          [value]="usuarioDirector.id"
+        >
+          {{ usuarioDirector.nombre }} - {{ usuarioDirector.email }}
+        </option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Conclusiones</label>
+      <textarea
+        class="form-control"
+        rows="5"
+        formControlName="conclusiones"
+        placeholder="Escriba las Conclusiones"
+        [maxlength]="limitText"
+        [ngClass]="{
+          'is-invalid': isInvalid('conclusiones'),
+          'is-valid': isValid('conclusiones')
+        }"
+      ></textarea>
+      <small class="text-secondary"
+        >Cantidad de caracteres
+        {{ getFormFieldValue("conclusiones").length }} de
+        {{ this.limitText }}
+      </small>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Trabajo Futuro</label>
+      <textarea
+        class="form-control"
+        rows="5"
+        formControlName="trabajoFuturo"
+        placeholder="Escriba el Trabajo Futuro"
+        [maxlength]="limitText"
+        [ngClass]="{
+          'is-invalid': isInvalid('trabajoFuturo'),
+          'is-valid': isValid('trabajoFuturo')
+        }"
+      ></textarea>
+      <small class="text-secondary"
+        >Cantidad de caracteres
+        {{ getFormFieldValue("trabajoFuturo").length }} de
+        {{ this.limitText }}
+      </small>
+    </div>
+
+    <ng-container *ngIf="!informeFinalId">
+      <div class="mb-3">
+        <label class="form-label fw-semibold"> InformeFinal </label>
+        <input
+          class="form-control"
+          type="file"
+          accept=".pdf, .docx"
+          (change)="changeFile($event, 'informeFinal')"
+        />
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<app-modal-footer
+  [buttons]="informeFinalId ? buttonsUpdate : buttonsCreate"
+  (clicker)="clickEvents($event)"
+></app-modal-footer>

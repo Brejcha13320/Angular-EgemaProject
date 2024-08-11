@@ -5,7 +5,6 @@ import { switchMap } from 'rxjs';
 import { Propuesta } from '@interfaces/propuesta.interface';
 
 @Component({
-  selector: 'app-detalle-propuesta',
   templateUrl: './detalle-propuesta.component.html',
   styleUrl: './detalle-propuesta.component.scss',
 })

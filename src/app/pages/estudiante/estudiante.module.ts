@@ -22,6 +22,9 @@ import { ModalCreateSolicitudComponent } from './components/modal-create-solicit
 import { DetailPropuestaComponent } from '@standalone/detail-propuesta/detail-propuesta.component';
 import { InformeFinalComponent } from './components/informe-final/informe-final.component';
 import { ModalUpdateArchivosComponent } from './components/modal-update-archivos/modal-update-archivos.component';
+import { ModalCreateInformeFinalComponent } from './components/modal-create-informe-final/modal-create-informe-final.component';
+import { DetalleInformeFinalComponent } from './pages/detalle-informe-final/detalle-informe-final.component';
+import { DetailInformeFinalComponent } from '@standalone/detail-informe-final/detail-informe-final.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,8 @@ import { ModalUpdateArchivosComponent } from './components/modal-update-archivos
     ModalCreatePropuestaComponent,
     InformeFinalComponent,
     ModalUpdateArchivosComponent,
+    ModalCreateInformeFinalComponent,
+    DetalleInformeFinalComponent,
   ],
   imports: [
     NgbModule,
@@ -49,6 +54,7 @@ import { ModalUpdateArchivosComponent } from './components/modal-update-archivos
     ModalFooterComponent,
     TitleSectionComponent,
     DetailPropuestaComponent,
+    DetailInformeFinalComponent,
   ],
 })
 export class EstudianteModule {}
