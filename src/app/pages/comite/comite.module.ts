@@ -16,6 +16,14 @@ import { NgBootstrap } from '@third-party/ng-bootstrap.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ReunionesComponent } from './pages/reuniones/reuniones.component';
 import { DetalleReunionComponent } from './pages/detalle-reunion/detalle-reunion.component';
+import { InformesFinalesComponent } from './pages/informes-finales/informes-finales.component';
+import { DetalleInformeFinalComponent } from './pages/detalle-informe-final/detalle-informe-final.component';
+import { TableInformesFinalesComponent } from './components/table-informes-finales/table-informes-finales.component';
+import { DetailInformeFinalComponent } from '@standalone/detail-informe-final/detail-informe-final.component';
+import { ModalAsignarJuradosComponent } from './components/modal-asignar-jurados/modal-asignar-jurados.component';
+import { ModalHeaderComponent } from '@standalone/modal-header/modal-header.component';
+import { ModalFooterComponent } from '@standalone/modal-footer/modal-footer.component';
+import { ModalEditarEstadoComponent } from './components/modal-editar-estado/modal-editar-estado.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +32,11 @@ import { DetalleReunionComponent } from './pages/detalle-reunion/detalle-reunion
     DetallePropuestaComponent,
     ReunionesComponent,
     DetalleReunionComponent,
+    InformesFinalesComponent,
+    DetalleInformeFinalComponent,
+    TableInformesFinalesComponent,
+    ModalAsignarJuradosComponent,
+    ModalEditarEstadoComponent,
   ],
   imports: [
     CommonModule,
@@ -36,7 +49,10 @@ import { DetalleReunionComponent } from './pages/detalle-reunion/detalle-reunion
     BadgeComponent,
     ItemEmailComponent,
     DetailPropuestaComponent,
+    DetailInformeFinalComponent,
     ButtonComponent,
+    ModalHeaderComponent,
+    ModalFooterComponent,
   ],
 })
 export class ComiteModule {}

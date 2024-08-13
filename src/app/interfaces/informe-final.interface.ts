@@ -6,7 +6,7 @@ export interface InformeFinal {
   id: string;
   propuestaId: string;
   directorId: string;
-  coordinadorId: string;
+  codirectorId: string;
   conclusiones: string;
   trabajoFuturo: string;
   estado: EstadoInformeFinal;
@@ -38,9 +38,39 @@ export interface InformeFinalFile {
   user: User;
 }
 
+export interface CreateInformeFinal
+  extends Omit<
+    InformeFinal,
+    | 'id'
+    | 'propuestaId'
+    | 'estado'
+    | 'createdAt'
+    | 'updatedAt'
+    | 'files'
+    | 'propuesta'
+    | 'director'
+    | 'codirector'
+    | 'jurados'
+  > {
+  informeFinal: Blob;
+}
+
+export type UpdateInformeFinal = Pick<
+  InformeFinal,
+  'codirectorId' | 'directorId' | 'conclusiones' | 'trabajoFuturo'
+>;
+
+export type UpdateEstadoInformeFinal = Pick<InformeFinal, 'estado'>;
+
+export type UpdateJuradosInformeFinal = Pick<
+  Jurado,
+  'userId' | 'informeFinalId'
+>;
+
 export type EstadoInformeFinal =
   | 'APROBADO'
   | 'PENDIENTE'
   | 'CAMBIOS'
   | 'NO_APROBADO';
+
 export type TipoInformeFinalFile = 'INFORME_FINAL';

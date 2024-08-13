@@ -165,47 +165,64 @@
     <p>{{ informeFinal.trabajoFuturo }}</p>
   </div>
 
-  <div class="border rounded p-3 mt-4">
-    <div>
-      <h5>Jurados</h5>
+  <ng-container *ngIf="informeFinal.jurados.length > 0; else notJurados">
+    <div class="border rounded p-3 mt-4">
+      <div>
+        <h5>Jurados</h5>
+      </div>
+      <table
+        *ngFor="let jurado of informeFinal.jurados"
+        class="table table-bordered mt-4"
+      >
+        <tbody>
+          <tr>
+            <th>Email</th>
+            <td>
+              {{ jurado.user.email }}
+            </td>
+          </tr>
+          <tr>
+            <th>Nombre</th>
+            <td>
+              {{ jurado.user.nombre }}
+            </td>
+          </tr>
+          <tr>
+            <th>Rol</th>
+            <td>
+              <app-badge
+                [title]="jurado.user.rol | i18nSelect : estadoMap"
+                [clase]="
+                  convertClaseColor(
+                    jurado.user.rol | i18nSelect : estadoClassMap
+                  )
+                "
+              ></app-badge>
+            </td>
+          </tr>
+          <tr>
+            <th>Comentario</th>
+            <td>
+              {{ jurado.comentario }}
+            </td>
+          </tr>
+          <tr>
+            <th>Fecha de Asignación</th>
+            <td>{{ jurado.createdAt | date }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <table
-      *ngFor="let jurado of informeFinal.jurados"
-      class="table table-bordered mt-4"
-    >
-      <tbody>
-        <tr>
-          <th>Email</th>
-          <td>
-            {{ jurado.user.email }}
-          </td>
-        </tr>
-        <tr>
-          <th>Nombre</th>
-          <td>
-            {{ jurado.user.nombre }}
-          </td>
-        </tr>
-        <tr>
-          <th>Rol</th>
-          <td>
-            <app-badge
-              [title]="jurado.user.rol | i18nSelect : estadoMap"
-              [clase]="
-                convertClaseColor(jurado.user.rol | i18nSelect : estadoClassMap)
-              "
-            ></app-badge>
-          </td>
-        </tr>
-        <tr>
-          <th>Comentario</th>
-          <td>
-            {{ jurado.comentario }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  </ng-container>
+  <ng-template #notJurados>
+    <div class="mt-4">
+      <app-alert
+        [title]="titleNotJurados"
+        [text]="textNotJurados"
+        [type]="'warning'"
+      ></app-alert>
+    </div>
+  </ng-template>
 </ng-container>
 
 <ng-template #notInformeFinal>

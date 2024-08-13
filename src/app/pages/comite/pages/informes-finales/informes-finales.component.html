@@ -1,0 +1,28 @@
+<ng-container [ngSwitch]="this.status">
+  <ng-container *ngSwitchCase="'success'">
+    <app-table-informes-finales
+      [title]="title"
+      [message]="message"
+      [dataTable]="dataTable$ | async"
+      [headersTable]="headersTable"
+      [dropdown]="dropdown"
+      (clickEvents)="clickEvents($event.idButton, $event.informeFinalId)"
+    ></app-table-informes-finales>
+  </ng-container>
+  <ng-container *ngSwitchCase="'loading'">
+    <app-alert
+      [type]="'info'"
+      [title]="'Consultando Información.'"
+      [text]="'Estamos buscando las propuestas de trabajo de grado'"
+    ></app-alert>
+  </ng-container>
+  <ng-container *ngSwitchCase="'error'">
+    <app-alert
+      [type]="'danger'"
+      [title]="'Problemas al buscar las solicitudes de trabajo de grado'"
+      [text]="
+        'Se han presentado problemas a la hora cargar las propuestas de trabajo de grado'
+      "
+    ></app-alert>
+  </ng-container>
+</ng-container>

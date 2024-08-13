@@ -1,0 +1,12 @@
+<ng-container *ngIf="informeFinal">
+  <!-- Detalle Informe Final -->
+  <app-detail-informe-final
+    [title]="title"
+    [message]="message"
+    [titleNotInformeFinal]="titleNotInformeFinal"
+    [textNotInformeFinal]="textNotInformeFinal"
+    [informeFinal]="informeFinal"
+    [nameRedirect]="nameRedirect"
+    (redirect)="redirect()"
+  ></app-detail-informe-final>
+</ng-container>

@@ -9,10 +9,10 @@
       <label class="form-label fw-semibold">Selecciona el Director</label>
       <select
         class="form-select"
-        formControlName="director"
+        formControlName="directorId"
         [ngClass]="{
-          'is-invalid': isInvalid('director'),
-          'is-valid': isValid('director')
+          'is-invalid': isInvalid('directorId'),
+          'is-valid': isValid('directorId')
         }"
       >
         <option value="" selected disabled>Seleccione una Opción</option>
@@ -27,14 +27,14 @@
 
     <div class="mb-3">
       <label class="form-label fw-semibold"
-        >Selecciona el Coodirector (Opcional)</label
+        >Selecciona el Codirector (Opcional)</label
       >
       <select
         class="form-select"
-        formControlName="codirector"
+        formControlName="codirectorId"
         [ngClass]="{
-          'is-invalid': isInvalid('codirector'),
-          'is-valid': isValid('codirector')
+          'is-invalid': isInvalid('codirectorId'),
+          'is-valid': isValid('codirectorId')
         }"
       >
         <option value="" selected disabled>Seleccione una Opción</option>

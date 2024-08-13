@@ -241,7 +241,7 @@ export class PropuestaComponent implements OnInit {
           return;
         }
 
-        this.updateToPendiente();
+        this.updateToPendiente(propuestaId);
         break;
     }
   }
@@ -249,10 +249,31 @@ export class PropuestaComponent implements OnInit {
   /**
    * Actualiza el estado a pendiente
    */
-  async updateToPendiente() {
+  async updateToPendiente(propuestaId: string) {
     const result = await this.updateToPendienteConfirm();
     if (result === 'ready') {
-      console.log('va hacer update');
+      this.estudiantePropuestaService
+        .updatePropuestaPendiente(propuestaId, {
+          estado: 'PENDIENTE',
+        })
+        .subscribe({
+          next: (propuesta) => {
+            this.notifyService.open({
+              clase: 'success',
+              title: 'Proceso Exitoso',
+              message: 'La propuesta se ha actualizado de manera exitosa',
+            });
+            this.getData();
+          },
+          error: (error) => {
+            this.notifyService.open({
+              clase: 'alert',
+              title: 'Error al actualizar la Propuesta',
+              message:
+                'Ha ocurrido un error al intentar actualizar la propuesta',
+            });
+          },
+        });
     }
   }
 

@@ -1,12 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotifyService } from '@shared-services/notify.service';
 import { EstudiantePropuestaService } from '../../services/estudiante-propuesta.service';
 import { Propuesta, TipoPropuestaFile } from '@interfaces/propuesta.interface';
 import { TokenService } from '@auth-services/token.service';
 import { environment } from '@environments/environment';
-import { ButtonModalFooter } from '@interfaces/modal.inteface';
 
 @Component({
   selector: 'app-modal-update-archivos',
@@ -38,12 +36,11 @@ export class ModalUpdateArchivosComponent implements OnInit {
    * @param notifyService servicio de notificaciones
    */
   constructor(
-    private fb: FormBuilder,
     private tokenService: TokenService,
     public activeModal: NgbActiveModal,
     private notifyService: NotifyService,
     private estudiantePropuestaService: EstudiantePropuestaService
-  ) { }
+  ) {}
 
   /**
    * Llama la función para crear el formulario

@@ -1,0 +1,53 @@
+<app-modal-header
+  [title]="'Actualizar Archivos Informe Final'"
+  (clicker)="close()"
+></app-modal-header>
+
+<div class="modal-body">
+  <div *ngIf="informeFinal" class="border rounded p-3 mt-4">
+    <div>
+      <h5>Documentos</h5>
+    </div>
+
+    <table class="table table-bordered mt-4">
+      <tbody>
+        <tr>
+          <th class="text-center" colspan="2">Informe Final</th>
+        </tr>
+        <tr>
+          <th>Descargar</th>
+          <td>
+            <div class="d-flex gap-3">
+              <p>{{ getFileName("INFORME_FINAL") }}</p>
+              <app-button
+                [outline]="true"
+                [icon]="'cloud-download'"
+                [tooltip]="'Descargar'"
+                (clicker)="downloadFile(getFileId('INFORME_FINAL'))"
+              ></app-button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th>Editar</th>
+          <td>
+            <input
+              class="form-control"
+              type="file"
+              accept=".pdf, .docx"
+              (change)="changeFile($event, 'INFORME_FINAL')"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="informeFinalFile" class="d-flex justify-content-end">
+      <app-button
+        [text]="'Actualizar Informe Final'"
+        [clase]="'success'"
+        (clicker)="updateInformeFinalFile('INFORME_FINAL')"
+      ></app-button>
+    </div>
+  </div>
+</div>

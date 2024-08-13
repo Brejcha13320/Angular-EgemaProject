@@ -55,7 +55,15 @@ export class DetailInformeFinalComponent {
    * Emite un evento
    */
   @Output() redirect: EventEmitter<boolean> = new EventEmitter();
-
+  /**
+   * titulo para cuando no hay jurados
+   */
+  titleNotJurados = 'Jurados sin asignar';
+  /**
+   * texto para cuando no hay jurados
+   */
+  textNotJurados =
+    'Por el momento el comite no ha realizado el proceso de asingnación de Jurados.';
   /**
    * Nombre del estado
    */

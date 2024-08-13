@@ -4,14 +4,15 @@ import { Observable } from 'rxjs';
 import {
   Reunion,
   Participante,
-  ReunionFile
+  ReunionFile,
 } from '@interfaces/reunion.interface';
+import { User } from '@interfaces/user.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ComiteReunionService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   /**
    * Hace la peticion para obtener las reuniones del comite
@@ -34,11 +35,7 @@ export class ComiteReunionService {
    * hace la petición para actualizar el estado de una reunion
    * @returns retorna la reunion
    */
-  updateEstadoReunion(
-    idReunion: string,
-    data: any
-  ): Observable<Reunion> {
+  updateEstadoReunion(idReunion: string, data: any): Observable<Reunion> {
     return this.http.put<Reunion>(`/comite/reunion/${idReunion}`, data);
   }
-
 }

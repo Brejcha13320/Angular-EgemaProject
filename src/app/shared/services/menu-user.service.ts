@@ -37,10 +37,10 @@ export class MenuUserService {
       url: '/inicio',
     },
     {
-      title: 'Trabajo de Grado',
+      title: 'Jurado',
       bootstrapIcon: 'code-slash',
       url: '/docente/trabajo-grado',
-    }
+    },
   ];
 
   /**
@@ -65,13 +65,13 @@ export class MenuUserService {
     {
       title: 'Informe final',
       bootstrapIcon: 'journal',
-      url: '/comite/informe-final',
+      url: '/comite/informes-finales',
     },
     {
       title: 'Sustentación',
       bootstrapIcon: 'person-check',
-      url: '/comite/sustentacion',
-    }
+      url: '/comite/sustentaciones',
+    },
   ];
 
   /**
@@ -93,7 +93,7 @@ export class MenuUserService {
    * Contructor de la clase
    * @param authService servicio de auth
    */
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
 
   /**
    * Retorna el menu del usuario segun el rol

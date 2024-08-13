@@ -19,11 +19,7 @@ export class EstudiantePropuestaService {
    * constructor de la clase
    * @param http dependencia para hacer peticiones http
    */
-  constructor(
-    private http: HttpClient,
-    private tokenService: TokenService,
-    private authService: AuthService
-  ) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   /**
    * hace la petición para obtener las propuestas del estudiante
@@ -85,6 +81,19 @@ export class EstudiantePropuestaService {
     data: UpdatePropuestaEstudiante
   ): Observable<Propuesta> {
     return this.http.put<Propuesta>(`/propuesta/estudiante/${id}`, data);
+  }
+
+  /**
+   * Recibe el id de la propuesta con la data nueva y actualiza la propuesta
+   * @param id id de la propuesta
+   * @param data data de la propuesta actualizada
+   * @returns retorna la propuesta actualizada
+   */
+  updatePropuestaPendiente(id: string, data: { estado: 'PENDIENTE' }) {
+    return this.http.put<Propuesta>(
+      `/propuesta/estudiante/pendiente/${id}`,
+      data
+    );
   }
 
   /**

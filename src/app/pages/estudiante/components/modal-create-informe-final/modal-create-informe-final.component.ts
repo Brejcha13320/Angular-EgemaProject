@@ -187,15 +187,88 @@ export class ModalCreateInformeFinalComponent {
   clickEvents(idButton: String) {
     switch (idButton) {
       case 'crear-informe-final':
-        // this.createPropuesta();
+        this.createInformeFinal();
         break;
       case 'actualizar-informe-final':
-        // this.updatePropuesta();
+        this.updateInformeFinal();
         break;
       case 'cancelar':
         this.close();
         break;
     }
+  }
+
+  /**
+   * Se activa cuando le dan al boton de crear informe final
+   */
+  createInformeFinal() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      this.notifyService.open({
+        title: 'Formulario No Valido',
+        message: 'Revise su formulario por favor',
+        clase: 'alert',
+      });
+      return;
+    }
+
+    this.estudianteInformeFinalService
+      .createInformeFinal(this.form.value)
+      .subscribe({
+        next: () => {
+          this.notifyService.open({
+            clase: 'success',
+            title: 'Proceso Exitoso',
+            message: 'Se ha creado el informe final de manera exitosa',
+          });
+          this.close(true);
+        },
+        error: () => {
+          this.notifyService.open({
+            clase: 'alert',
+            title: 'Error al crear el informe final',
+            message: 'Ha ocurrido un error al intentar crear el informe final',
+          });
+        },
+      });
+  }
+
+  /**
+   * Se activa cuando le dan al boton de actualizar informe final
+   */
+  updateInformeFinal() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      this.notifyService.open({
+        title: 'Formulario No Valido',
+        message: 'Revise su formulario por favor',
+        clase: 'alert',
+      });
+      return;
+    }
+
+    if (!this.informeFinalId) return;
+
+    this.estudianteInformeFinalService
+      .updateInformeFinal(this.informeFinalId, this.form.value)
+      .subscribe({
+        next: () => {
+          this.notifyService.open({
+            clase: 'success',
+            title: 'Proceso Exitoso',
+            message: 'Se ha actualizado el informe final de manera exitosa',
+          });
+          this.close(true);
+        },
+        error: () => {
+          this.notifyService.open({
+            clase: 'alert',
+            title: 'Error al actualizar el informe final',
+            message:
+              'Ha ocurrido un error al intentar actualizar el informe final',
+          });
+        },
+      });
   }
 
   /**

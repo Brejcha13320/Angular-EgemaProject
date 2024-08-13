@@ -3,8 +3,6 @@ import { Propuesta } from '@interfaces/propuesta.interface';
 import { RequestStatus } from '@interfaces/request-status.interface';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { ComitePropuestaService } from '../../services/comite-propuesta.service';
-import { NotifyService } from '@shared-services/notify.service';
-import { Dropdown } from '@interfaces/dropdown.interface';
 import { Router } from '@angular/router';
 
 @Component({

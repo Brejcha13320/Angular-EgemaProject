@@ -13,6 +13,8 @@ import { ModalCreateInformeFinalComponent } from '../modal-create-informe-final/
 import { Dropdown } from '@interfaces/dropdown.interface';
 import { ClaseColor } from '@interfaces/clase-color.interface';
 import { Router } from '@angular/router';
+import { ModalUpdateArchivosInformeComponent } from '../modal-update-archivos-informe/modal-update-archivos-informe.component';
+import { ModalConfirmComponent } from '@standalone/modal-confirm/modal-confirm.component';
 
 @Component({
   selector: 'app-informe-final',
@@ -148,13 +150,40 @@ export class InformeFinalComponent implements OnInit {
   /**
    * Abre el modal para crear el informe final
    */
-  openModalCreateInformeFinal() {
+  openModalCreateInformeFinal(informeFinalId?: string) {
     const modalRef = this.modalService.open(ModalCreateInformeFinalComponent, {
       centered: true,
       scrollable: true,
       size: 'lg',
     });
+
     modalRef.componentInstance.propuestaId = this.propuestas[0].id;
+
+    if (informeFinalId) {
+      modalRef.componentInstance.informeFinalId = informeFinalId;
+    }
+
+    modalRef.result.then((status) => {
+      if (status) {
+        this.getData();
+      }
+    });
+  }
+
+  /**
+   * Abre el modal para editar los archivos
+   * @param informeFinalId id de la informeFinal
+   */
+  openModalUpdateArchivos(informeFinalId: string) {
+    const modalRef = this.modalService.open(
+      ModalUpdateArchivosInformeComponent,
+      {
+        centered: true,
+        scrollable: true,
+        size: 'lg',
+      }
+    );
+    modalRef.componentInstance.informeFinalId = informeFinalId;
     modalRef.result.then((status) => {
       if (status) {
         this.getData();
@@ -165,7 +194,7 @@ export class InformeFinalComponent implements OnInit {
   /**
    * Eventos segun el boton precionado
    * @param idButton id del boton precionado
-   * @param idPropuesta id de la propuesta
+   * @param idPropuesta id de la informe final
    */
   clickEvents(
     idButton: string,
@@ -191,7 +220,7 @@ export class InformeFinalComponent implements OnInit {
           return;
         }
 
-        // this.openModalCreatePropuesta(propuestaId);
+        this.openModalCreateInformeFinal(informeFinalId);
         break;
       case 'editar-archivos':
         if (!informeFinalId || estado != 'CAMBIOS') {
@@ -204,7 +233,7 @@ export class InformeFinalComponent implements OnInit {
           return;
         }
 
-        // this.openModalUpdateArchivos(propuestaId);
+        this.openModalUpdateArchivos(informeFinalId);
         break;
       case 'update-pendiente':
         if (!informeFinalId || estado != 'CAMBIOS') {
@@ -217,9 +246,55 @@ export class InformeFinalComponent implements OnInit {
           return;
         }
 
-        // this.updateToPendiente();
+        this.updateToPendiente(informeFinalId);
         break;
     }
+  }
+
+  /**
+   * Actualiza el estado a pendiente
+   */
+  async updateToPendiente(informeFinalId: string) {
+    const result = await this.updateToPendienteConfirm();
+    if (result === 'ready') {
+      this.estudianteInformeFinalService
+        .updateInformeFinalPendiente(informeFinalId, {
+          estado: 'PENDIENTE',
+        })
+        .subscribe({
+          next: (informeFinal) => {
+            this.notifyService.open({
+              clase: 'success',
+              title: 'Proceso Exitoso',
+              message: 'El informe final se ha actualizado de manera exitosa',
+            });
+            this.getData();
+          },
+          error: (error) => {
+            this.notifyService.open({
+              clase: 'alert',
+              title: 'Error al actualizar el Informe Final',
+              message:
+                'Ha ocurrido un error al intentar actualizar el informe final',
+            });
+          },
+        });
+    }
+  }
+
+  /**
+   * Modal de Confirmacion
+   * @returns respuesta del modal
+   */
+  async updateToPendienteConfirm() {
+    const modalConfirmRef = this.modalService.open(ModalConfirmComponent, {
+      centered: true,
+      scrollable: true,
+      size: 'lg',
+    });
+    modalConfirmRef.componentInstance.text =
+      'El estado del informe final será PENDIENTE, y estará sujeta a revisión por el COMITÉ. Es importante recordar que durante este proceso no podrás editar tu informe final.';
+    return modalConfirmRef.result.then((result) => result);
   }
 
   /**

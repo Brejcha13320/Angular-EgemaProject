@@ -10,7 +10,6 @@ import { Observable, catchError, throwError } from 'rxjs';
 
 import { TokenService } from '@auth-services/token.service';
 import { AuthService } from '@auth-services/auth.service';
-import { Router } from '@angular/router';
 import { environment } from '@environments/environment';
 
 @Injectable()

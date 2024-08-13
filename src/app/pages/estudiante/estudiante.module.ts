@@ -25,6 +25,7 @@ import { ModalUpdateArchivosComponent } from './components/modal-update-archivos
 import { ModalCreateInformeFinalComponent } from './components/modal-create-informe-final/modal-create-informe-final.component';
 import { DetalleInformeFinalComponent } from './pages/detalle-informe-final/detalle-informe-final.component';
 import { DetailInformeFinalComponent } from '@standalone/detail-informe-final/detail-informe-final.component';
+import { ModalUpdateArchivosInformeComponent } from './components/modal-update-archivos-informe/modal-update-archivos-informe.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { DetailInformeFinalComponent } from '@standalone/detail-informe-final/de
     ModalUpdateArchivosComponent,
     ModalCreateInformeFinalComponent,
     DetalleInformeFinalComponent,
+    ModalUpdateArchivosInformeComponent,
   ],
   imports: [
     NgbModule,

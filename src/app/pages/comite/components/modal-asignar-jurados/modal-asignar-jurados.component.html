@@ -1,0 +1,65 @@
+<app-modal-header
+  [title]="'Asignar Jurados'"
+  (clicker)="close()"
+></app-modal-header>
+
+<div class="modal-body">
+  <div class="d-flex justify-content-end mt-3 mb-3">
+    <app-button
+      [text]="'Agregar Jurado'"
+      [clase]="'primary'"
+      (clicker)="addJurado()"
+    ></app-button>
+  </div>
+  <table *ngIf="formJurados" class="table table-striped border">
+    <thead>
+      <tr>
+        <th
+          *ngFor="let headerTable of headersTable"
+          class="text-center"
+          scope="col"
+        >
+          {{ headerTable }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        [formGroup]="getJuradosFormGroup(i)"
+        *ngFor="let juradoForm of formJurados.controls; index as i"
+      >
+        <td>
+          <select
+            class="form-select"
+            formControlName="userId"
+            [ngClass]="{
+              'is-invalid': isInvalid('userId', i),
+              'is-valid': isValid('userId', i)
+            }"
+          >
+            <option value="" selected disabled>Seleccione una Opción</option>
+            <option
+              *ngFor="let usuarioJurado of usuariosJurados"
+              [value]="usuarioJurado.id"
+            >
+              {{ usuarioJurado.nombre }} - {{ usuarioJurado.email }}
+            </option>
+          </select>
+        </td>
+
+        <td class="text-center">
+          <app-button
+            [clase]="'danger'"
+            [icon]="'trash'"
+            (clicker)="onRemove(i)"
+          ></app-button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-modal-footer
+  [buttons]="buttons"
+  (clicker)="clickEvents($event)"
+></app-modal-footer>

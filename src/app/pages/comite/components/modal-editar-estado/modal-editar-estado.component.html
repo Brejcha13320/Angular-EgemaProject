@@ -1,0 +1,30 @@
+<app-modal-header [title]="title" (clicker)="close()"></app-modal-header>
+
+<div class="modal-body">
+  <div *ngIf="form" class="container" [formGroup]="form">
+    <div class="input-group mb-3">
+      <span class="input-group-text"
+        >Selecciona el estado del Informe Final</span
+      >
+      <select
+        class="form-select"
+        formControlName="estado"
+        [ngClass]="{
+          'is-invalid': isInvalid('estado'),
+          'is-valid': isValid('estado')
+        }"
+      >
+        <option value="" selected disabled>Seleccione una Opción</option>
+        <option value="APROBADO">Aprobado</option>
+        <option value="PENDIENTE">Pendiente</option>
+        <option value="CAMBIOS">Cambios</option>
+        <option value="NO_APROBADO">No Aprobado</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<app-modal-footer
+  [buttons]="buttons"
+  (clicker)="clickEvents($event)"
+></app-modal-footer>
