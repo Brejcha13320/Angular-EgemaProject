@@ -5,6 +5,7 @@ import { DetallePropuestaComponent } from './pages/detalle-propuesta/detalle-pro
 import { ReunionesComponent } from './pages/reuniones/reuniones.component';
 import { InformesFinalesComponent } from './pages/informes-finales/informes-finales.component';
 import { DetalleInformeFinalComponent } from './pages/detalle-informe-final/detalle-informe-final.component';
+import { JuradoComponent } from '@standalone/jurado/jurado.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'informes-finales/informe-final/:id',
     component: DetalleInformeFinalComponent,
+  },
+  {
+    path: 'jurado',
+    component: JuradoComponent,
   },
 ];
 

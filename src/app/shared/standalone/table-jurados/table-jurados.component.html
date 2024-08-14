@@ -3,7 +3,7 @@
 <div
   class="mt-5 border-top border-end border-start p-2 d-flex justify-content-between px-4 py-4"
 >
-  <h4 class="fw-light">Listado de Propuestas de Trabajo de Grado</h4>
+  <h4 class="fw-light">Listado de Informes Finales</h4>
 </div>
 
 <table *ngIf="dataTable" class="table table-striped border">
@@ -22,23 +22,32 @@
     <tr *ngFor="let data of dataTable">
       <td scope="row">
         <app-item-email
-          [email]="data.propuesta.solicitudTrabajoGrado.estudiante.email"
+          [email]="
+            data.informeFinal.propuesta.solicitudTrabajoGrado.estudiante.email
+          "
         ></app-item-email>
       </td>
       <td scope="row">
-        {{ data.propuesta.solicitudTrabajoGrado.estudiante.nombre | titlecase }}
+        {{
+          data.informeFinal.propuesta.solicitudTrabajoGrado.estudiante.nombre
+            | titlecase
+        }}
       </td>
       <td class="text-center">
         <app-badge
-          [title]="data.estado | i18nSelect : estadoMap"
-          [clase]="convertClaseColor(data.estado | i18nSelect : estadoClassMap)"
+          [title]="data.informeFinal.estado | i18nSelect : estadoMap"
+          [clase]="
+            convertClaseColor(
+              data.informeFinal.estado | i18nSelect : estadoClassMap
+            )
+          "
         ></app-badge>
       </td>
       <td>{{ data.createdAt | date }}</td>
       <td class="text-center">
         <app-dropdown
           [dropdown]="dropdown"
-          (clicker)="emitEvents($event, data.id)"
+          (clicker)="emitEvents($event, data.informeFinalId, data.id)"
         ></app-dropdown>
       </td>
     </tr>

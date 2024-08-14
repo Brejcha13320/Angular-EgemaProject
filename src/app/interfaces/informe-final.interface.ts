@@ -23,10 +23,14 @@ export interface Jurado {
   id: string;
   userId: string;
   informeFinalId: string;
-  comentario: String;
+  comentario: string;
   createdAt: Date;
   updatedAt: Date;
   user: User;
+}
+
+export interface JuradoInformeFinal extends Jurado {
+  informeFinal: InformeFinal;
 }
 
 export interface InformeFinalFile {

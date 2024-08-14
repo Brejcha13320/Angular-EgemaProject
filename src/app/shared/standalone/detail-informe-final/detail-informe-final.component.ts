@@ -50,7 +50,7 @@ export class DetailInformeFinalComponent {
   /**
    * Texto de un button para redicreccionar atras
    */
-  @Input() nameRedirect: string = 'Atrás';
+  @Input() nameRedirect: string = '';
   /**
    * Emite un evento
    */

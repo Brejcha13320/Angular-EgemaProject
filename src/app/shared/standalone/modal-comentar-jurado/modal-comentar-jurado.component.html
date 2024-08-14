@@ -1,0 +1,32 @@
+<app-modal-header
+  [title]="'Comentario del Informe Final'"
+  (clicker)="close()"
+></app-modal-header>
+
+<div class="modal-body">
+  <div *ngIf="form" class="container" [formGroup]="form">
+    <div class="mb-3">
+      <label class="form-label fw-semibold">Comentarios</label>
+      <textarea
+        class="form-control"
+        rows="5"
+        formControlName="comentario"
+        placeholder="Escriba los Comentarios"
+        [maxlength]="limitText"
+        [ngClass]="{
+          'is-invalid': isInvalid('comentario'),
+          'is-valid': isValid('comentario')
+        }"
+      ></textarea>
+      <small class="text-secondary"
+        >Cantidad de caracteres {{ getFormFieldValue("comentario").length }} de
+        {{ this.limitText }}
+      </small>
+    </div>
+  </div>
+</div>
+
+<app-modal-footer
+  [buttons]="buttons"
+  (clicker)="clickEvents($event)"
+></app-modal-footer>

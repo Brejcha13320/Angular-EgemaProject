@@ -38,8 +38,8 @@ export class MenuUserService {
     },
     {
       title: 'Jurado',
-      bootstrapIcon: 'code-slash',
-      url: '/docente/trabajo-grado',
+      bootstrapIcon: 'people',
+      url: '/comite/jurado',
     },
   ];
 
@@ -66,6 +66,11 @@ export class MenuUserService {
       title: 'Informe final',
       bootstrapIcon: 'journal',
       url: '/comite/informes-finales',
+    },
+    {
+      title: 'Jurado',
+      bootstrapIcon: 'people',
+      url: '/comite/jurado',
     },
     {
       title: 'Sustentación',
